@@ -79,7 +79,7 @@ knitr::include_graphics("images/rpkgs-book.png")
 
 # Let's build a package!
 
-## Naming your package {.flexbox .vcenter}
+## Naming your package
 
 ### Requirements
 
@@ -123,13 +123,14 @@ Where should the new package be created?
   - `man/`: documentation
   - `R/`: R code files
   - `vignettes/`: vignettes
+  - &nbsp;
 
   **Other components**
   
   - `README`: human readible package information
   - `data/`: data
   - `inst/`: installed files
-  - `src/`: compiled code (*e.g.*, C++ using `Rcpp`)
+  - `src/`: compiled code (*e.g.*, using [`Rcpp`](https://cran.r-project.org/package=Rcpp))
   - `tests/`: testing
 </div>
 
@@ -140,13 +141,9 @@ Where should the new package be created?
 - package metadata (authors, version, dependencies, etc.)
 - what does the package do?
 
-## Package information
-
 ### The `NEWS` file
 
 - describes what's new in each version
-
-## Package information
 
 ### The `README` file
 
@@ -201,7 +198,7 @@ browseVignettes("fpCompare")
 
 [github.com/achubaty/meow](https://github.com/achubaty/meow)
 
-```{r, echo=TRUE, fig.height=4}
+```{r, echo=TRUE, fig.height=4, fig.width=5}
 #install_github("achubaty/meow")
 library(meow)
 meow()
