@@ -212,15 +212,15 @@ meow()
 - local development
 
 ```{r eval=FALSE}
-library(devtools)
-dev_mode()
-load_all()
+devtools::dev_mode()
+devtools::load_all()
 ```
 
 - local build / install
 
 ```{r eval=FALSE}
-build()
+devtools::build()
+devtools::install()
 ```
 
 ## Testing your code (1)
@@ -298,7 +298,7 @@ install_github("achubaty/meow")
 - submit to CRAN
 
 ```{r eval=FALSE}
-install.packages("meow") ## not on CRAN yet ;)
+install.packages("fpCompare")
 ```
 
 - also, [`drat`](https://cran.r-project.org/package=drat) and [`miniCRAN`](https://cran.r-project.org/package=miniCRAN)
