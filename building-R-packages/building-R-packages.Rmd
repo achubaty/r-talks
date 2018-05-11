@@ -92,7 +92,7 @@ knitr::include_graphics("images/rpkgs-book.png")
 
 ### Suggestions
 
-1. should be unique;
+1. should be unique (see [available](https://cran.r-project.org/package=available) package);
 2. should be evocative of its function.
 
 ## Getting started with RStudio {.flexbox .vcenter}
