@@ -12,6 +12,8 @@ output:
     highlight: tango
     incremental: no
     widescreen: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Why build your own?
@@ -19,6 +21,8 @@ output:
 1. **make your own work more efficient**
 2. code portability
 3. help others
+4. code performance
+5. code testing
 
 ## Building R packages is easy^\*^...
 
@@ -63,8 +67,7 @@ RStudio IDE makes package development simple and accessible to beginners
 
 ```{r, eval=FALSE}
 install.packages(c("devtools", "roxygen2", "testthat", "knitr"))
-library(devtools)
-has_devel() ## TRUE
+devtools::has_devel() ## TRUE
 ```
 
 ## The R package bible
