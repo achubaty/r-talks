@@ -295,7 +295,7 @@ htmltools::img(src = "images/GitHub-Mark-64px.png",
 install_github("achubaty/meow")
 ```
 
-- submit to CRAN
+- submit to CRAN (be sure to have a look at [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html))
 
 ```{r eval=FALSE}
 install.packages("fpCompare")
