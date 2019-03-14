@@ -1,8 +1,9 @@
-spatial-data-best-practices
+Best Practices Working With Spatial Data in R
 ========================================================
 author: Alex M Chubaty
 date: 02 May 2019
 autosize: true
+transition: rotate
 
 First Slide
 ========================================================
