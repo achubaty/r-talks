@@ -35,7 +35,56 @@ Notes available from <https://github.com/achubaty/r-talks/tree/master/spatial-da
 Best Practices
 ========================================================
 
-**Don't be greedy**, especially on a shared system 😄
+## References
+
+- Bryan, J. 2017. Excuse me, do you have a moment to talk about version control? PeerJ Prepr. 5:1–23. https://peerj.com/preprints/3159v2/
+- Visser M. D. _et al._. 2015. Speeding up ecological and evolutionary computations in R; essentials of high performance computing for biologists. PLOS Comput. Biol.  11:e1004140.
+- Wilson, G. _et al._ 2014. Best practices for scientific computing. PLoS Biol. 12:e1001745.
+
+Write scripts for _people_, not computers
+========================================================
+
+> it's great if others can use your code, but it's more important that you can reuse it
+
+- comment your code with _why_ (design & purpose), not the _what_ (mechanics)
+- use descriptive names (_nouns_ for objects; _verbs_ for functions)
+- use consistent style/formatting
+  - check formatting with `lintr`
+
+Make incremental changes
+=========================================================
+
+- use version control (e.g., git & GitHub)
+
+Don't repeat yourself
+=========================================================
+
+- don't copy/paste
+- don't copy paste
+- don't copy/paste
+- modularize code for reuse (use functions)
+
+Expect mistakes
+=========================================================
+
+- use assertions & tests
+
+Collaborate
+=========================================================
+
+- pair programming
+- code review
+
+Optimize your code
+=========================================================
+
+- speed and memory improvements
+- **only do this after code is working correctly**
+
+Don't be greedy
+========================================================
+
+Especially on a shared system 😄
 
 1. only use what you need;
 2. improve your code so it's less greedy;
@@ -99,10 +148,7 @@ Cluster operations on Windows use more RAM than they should...
 
 Always close your clusters when done to ensure that RAM gets freed
 
-Other stuff
+Caching and memoisation
 ========================================================
 
 - `reproducible::prepInputs` and `reproducible::Cache`
-- code examples we can work through and try
-- before workshop, send out quick survey to find out which packages / operations people are using
-- version control (GitHub)
