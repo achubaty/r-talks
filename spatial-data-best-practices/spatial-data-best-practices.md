@@ -23,6 +23,11 @@ A note about DataCamp:
 Today's Workshop
 ========================================================
 
+Notes available from <https://github.com/achubaty/r-talks/tree/master/spatial-data-best-practices>
+
+0. CRAN taskviews:
+  - <https://cran.r-project.org/web/views/Spatial.html>
+  - <https://cran.r-project.org/web/views/SpatioTemporal.html>
 1. Reading/loading spatial data
 2. Basic plotting
 3. **Gotchas and best practices**
@@ -30,7 +35,7 @@ Today's Workshop
 Best Practices
 ========================================================
 
-Don't be greedy on a shared system 😄
+**Don't be greedy**, especially on a shared system 😄
 
 1. only use what you need;
 2. improve your code so it's less greedy;
