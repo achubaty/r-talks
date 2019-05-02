@@ -33,3 +33,5 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
+
+spatial-data-best-practices/spatial-data-best-practices\.html

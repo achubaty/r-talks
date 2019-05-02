@@ -32,16 +32,50 @@ Notes available from <https://github.com/achubaty/r-talks/tree/master/spatial-da
 2. Basic plotting
 3. **Gotchas and best practices**
 
+What you'll need for today
+========================================================
+
+```r
+install.packages(c("assertthat", "crayon", "raster", "rgdal", "sp"))
+
+library(sp)
+library(raster)
+library(crayon)
+```
+
 Best Practices
 ========================================================
 
 ## References
 
 - Bryan, J. 2017. Excuse me, do you have a moment to talk about version control? PeerJ Prepr. 5:1–23. https://peerj.com/preprints/3159v2/
-- Visser M. D. _et al._. 2015. Speeding up ecological and evolutionary computations in R; essentials of high performance computing for biologists. PLOS Comput. Biol.  11:e1004140.
+- Visser M. D. _et al._. 2015. Speeding up ecological and evolutionary computations in R; essentials of high performance computing for biologists. PLOS Comput. Biol. 11:e1004140.
 - Wilson, G. _et al._ 2014. Best practices for scientific computing. PLoS Biol. 12:e1001745.
 
-Write scripts for _people_, not computers
+R projects
+=========================================================
+
+Every project should be self-contained and use relative file paths.
+
+```
+myProject/
+  |_ data/           ## shared data could be symlinked
+  |_ outputs/
+  |_ presentations/
+  |_ publications/
+  |_ scripts/
+  |_ src/
+```
+
+Use RStudio projects!
+- <https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects>
+
+Don't save/load your workspace
+=========================================================
+
+![](rstudio-workspace.png)
+
+Write scripts for people, not computers
 ========================================================
 
 > it's great if others can use your code, but it's more important that you can reuse it
@@ -49,7 +83,7 @@ Write scripts for _people_, not computers
 - comment your code with _why_ (design & purpose), not the _what_ (mechanics)
 - use descriptive names (_nouns_ for objects; _verbs_ for functions)
 - use consistent style/formatting
-  - check formatting with `lintr`
+  - check formatting with `lintr` package
 
 Make incremental changes
 =========================================================
@@ -68,6 +102,13 @@ Expect mistakes
 =========================================================
 
 - use assertions & tests
+
+```r
+df1 <- data.frame(A = 1:26, B = sample(letters))
+head(df1)
+
+assertthat::assert_that(is(df1$A, "character")) ## why?
+```
 
 Collaborate
 =========================================================
@@ -102,9 +143,10 @@ What Does It Mean For Code To Be Greedy?
 The Basics
 ========================================================
 
-> you wouldn't turn the oven on and walk away without setting a timer...why risk burning the computer down with your R scripts?
+> would you turn on the oven and walk away without setting a timer?
 
 1. remove intermediate objects (save them to disk for retrieval later if you need them); - RAM
+
 2. have the script quit the rsession when done; - RAM
 
     ```r
@@ -113,42 +155,150 @@ The Basics
     }
     ```
 
-3. stagger you jobs using `Sys.sleep()`. - RAM; CPU; disk; Network
+3. schedule your scripts to run at later time or stagger jobs using `Sys.sleep()`. - RAM; CPU; disk; network
 
-Code Profiling
+Code profiling (1)
 ========================================================
 
 Identify bottlenecks + high resource use
 
-1. `Sys.time()`;
-2. `object.size()`
+1. Run time
+
+  ```r
+  startTime <- Sys.time()
+  reallyLongFunction()
+  endTime <- Sys.time() - startTime
+  message(cyan("reallyLongFunction() took ", endTime, "s to run."))
+  ```
+
+Code profiling (2)
+========================================================
+
+Identify bottlenecks + high resource use
+
+2. Memory usage
+
+  ```r
+  r <- raster("~/data/LandCoverOfCanada2005_V1_4/LCC2005_V1_4a.tif")
+  object.size(r)
+  inMemory(r)
+  ```
+
+Code profiling (3)
+========================================================
+
+Identify bottlenecks + high resource use
+
 3. Rstudio profiler
+
+  - **profiling time**
+    - <https://support.rstudio.com/hc/en-us/articles/218221837-Profiling-with-RStudio#profiling-time-example>
+
+  - **profiling memory**
+    - <https://support.rstudio.com/hc/en-us/articles/218221837-Profiling-with-RStudio#profiling-memory-example>
 
 Memory Management in R
 ========================================================
 
 Garbage collection is handled by R and your OS will try to free RAM that is no longer being used.
 
-However, you can make it more efficient by frequently removing transient/intermediate objects from memory:
+However, you can make scripts more efficient by frequently removing transient/intermediate objects from memory:
 
-- save to disk often, and load from disk when recovering your session (so you don't need to rerun everything each time);
-- cache your intermediate results
+1. save to disk often (but not too often!);
+2. load from disk when recovering your session (so you don't need to rerun everything each time);
+3. cache your intermediate results (`reproducible::Cache()`)
 
-Temp Storage
+Temp Storage (1)
 ========================================================
 
 Many `raster` operations use tempfiles behind the scenes, which will clutter your temp drive (a big problem when the machine isn't rebooted frequently).
 
-Use `rasterOptions()` to set `tmpdir` manually and be sure to cleanup (`unlink(raster::tmpDir(), recursive = TRUE)`) at the end of your script/session.
+```r
+## make a note of this location, restart R session, and rerun
+raster::tmpDir()
+```
+
+Temp Storage (2)
+========================================================
+
+Use `rasterOptions()` to set `tmpdir` manually and be sure to cleanup at the end of your script/session.
+
+```r
+maxMemory <- 5e+7
+scratchDir <- file.path("/tmp/scratch/MPB")
+
+rasterOptions(default = TRUE)
+options(rasterMaxMemory = maxMemory, rasterTmpDir = scratchDir)
+
+raster::tmpDir()
+
+...
+
+unlink(raster::tmpDir(), recursive = TRUE)
+```
+
+Minimizing object/file size
+========================================================
+
+```r
+> ?dataType
+```
+
+**Data type** | **min value**  | **max value**
+--------------|----------------|--------------
+LOG1S         | FALSE (0)      | TRUE (1)
+INT1S         | -127           | 127
+INT1U         | 0              | 255
+INT2S         | -32,767        | 32,767
+INT2U         | 0              | 65,534
+INT4S         | -2,147,483,647 | 2,147,483,647
+INT4U         | 0              | 4,294,967,296
+FLT4S         | -3.4e+38       | 3.4e+38
+FLT8S         | -1.7e+308      | 1.7e+308
 
 Turn Off Your Clusters
 ========================================================
 
-Cluster operations on Windows use more RAM than they should...
+Cluster operations on Windows use more RAM than they should because Windows can't fork.
 
-Always close your clusters when done to ensure that RAM gets freed
+Always close your clusters when done to ensure that RAM gets freed.
 
-Caching and memoisation
+```r
+cl <- raster::beginCluster()
+...
+raster::endCluster(cl) ## in a function, put this in `on.exit()`
+```
+
+`raster` and `sp` gotchas
 ========================================================
 
-- `reproducible::prepInputs` and `reproducible::Cache`
+- `RasterStack` converting to `RasterBrick`
+- `writeRaster()` changes the projection
+- Factor rasters are a *pain*
+- Use buffer width 0 before intersection etc.
+  - see `reproducible::fixErrors()` within `reproducible::prepInputs`
+
+Other useful packages
+=========================================================
+
+```r
+install.packages("sf")    ## will supercede `sp`
+install.packages("stars") ## will supercede `raster`
+
+## fast shapefile operations
+devtools::install_github("s-u/fastshp")
+
+## fast raster operations
+install.packages("fasterize")
+install.packages("velox")
+
+## more wrappers for GDAL in R
+install.packages("gdalUtils")
+```
+
+Questions?
+=========================================================
+
+```{r}
+meow::meow()
+```
