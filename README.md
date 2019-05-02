@@ -2,4 +2,5 @@
 
 My various presentations on R topics.
 
-HTML files can be previewed in browser by prepending `https://htmlpreview.github.io/?` to the HTML file's URL.
+- Building R packages <http://www.alexchubaty.com/r-talks/building-R-packages/building-R-packages.html>
+- Spatial Data Best Practices <http://www.alexchubaty.com/r-talks/spatial-data-best-practices/spatial-data-best-practices.html>
