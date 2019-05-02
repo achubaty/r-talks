@@ -298,7 +298,7 @@ raster::endCluster(cl) ## in a function, put this in `on.exit()`
 
 - `RasterStack` converting to `RasterBrick`
 - `writeRaster()` changes the projection
-- Factor rasters are a *pain*
+- Factor rasters are a *pain* (use `factorValues()`)
 - Use buffer width 0 before intersection etc.
   - see `reproducible::fixErrors()` within `reproducible::prepInputs`
 
