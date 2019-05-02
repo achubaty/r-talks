@@ -140,22 +140,31 @@ What Does It Mean For Code To Be Greedy?
 4. CPU time;
 5. Network use.
 
-The Basics
+The Basics (1)
 ========================================================
 
-> would you turn on the oven and walk away without setting a timer?
+Remove intermediate objects to free RAM.
 
-1. remove intermediate objects (save them to disk for retrieval later if you need them); - RAM
+Save them to disk for retrieval later if you need them.
 
-2. have the script quit the rsession when done; - RAM
+The Basics (2)
+========================================================
 
-    ```r
-    exit <- Q <- function(save = "no", status = 0, runLast = TRUE) {
-      q(save = save, status = 0, runLast = TRUE)
-    }
-    ```
+Have the script quit the rsession when done to free RAM.
 
-3. schedule your scripts to run at later time or stagger jobs using `Sys.sleep()`. - RAM; CPU; disk; network
+```r
+exit <- Q <- function(save = "no", status = 0, runLast = TRUE) {
+  q(save = save, status = 0, runLast = TRUE)
+}
+```
+
+The Basics (3)
+========================================================
+
+To best use RAM, CPU, disk, and network when others aren't likely using them:
+
+- Schedule your scripts to run at later time (RStudio v1.2)
+- Stagger jobs using `Sys.sleep()`
 
 Code profiling (1)
 ========================================================
