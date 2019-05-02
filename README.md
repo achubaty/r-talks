@@ -2,5 +2,5 @@
 
 My various presentations on R topics.
 
-- [Building R Packages](r-talks/building-R-packages/building-R-packages.html)
-- [Spatial Data Best Practices](r-talks/spatial-data-best-practices/spatial-data-best-practices.html)
+- [Building R Packages](building-R-packages/building-R-packages.html)
+- [Best Practices Working With Spatial Data in R](spatial-data-best-practices/spatial-data-best-practices.html)
