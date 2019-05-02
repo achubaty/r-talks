@@ -107,7 +107,7 @@ Expect mistakes
 df1 <- data.frame(A = 1:26, B = sample(letters))
 head(df1)
 
-assertthat::assert_that(is(df1$A, "character")) ## why?
+assertthat::assert_that(is(df1$B, "character")) ## why?
 ```
 
 Collaborate
