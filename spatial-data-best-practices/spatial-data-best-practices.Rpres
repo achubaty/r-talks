@@ -171,34 +171,34 @@ Code profiling (1)
 
 Identify bottlenecks + high resource use
 
-1. Run time
+## Determine code run time
 
-  ```r
-  startTime <- Sys.time()
-  reallyLongFunction()
-  endTime <- Sys.time() - startTime
-  message(cyan("reallyLongFunction() took ", endTime, "s to run."))
-  ```
+```r
+startTime <- Sys.time()
+reallyLongFunction()
+endTime <- Sys.time() - startTime
+message(cyan("reallyLongFunction() took ", endTime, "s to run."))
+```
 
 Code profiling (2)
 ========================================================
 
 Identify bottlenecks + high resource use
 
-2. Memory usage
+## Determine memory usage
 
-  ```r
-  r <- raster("~/data/LandCoverOfCanada2005_V1_4/LCC2005_V1_4a.tif")
-  object.size(r)
-  inMemory(r)
-  ```
+```r
+r <- raster("~/data/LandCoverOfCanada2005_V1_4/LCC2005_V1_4a.tif")
+object.size(r)
+inMemory(r)
+```
 
 Code profiling (3)
 ========================================================
 
 Identify bottlenecks + high resource use
 
-3. Rstudio profiler
+## Rstudio profiler
 
   - **profiling time**
     - <https://support.rstudio.com/hc/en-us/articles/218221837-Profiling-with-RStudio#profiling-time-example>
