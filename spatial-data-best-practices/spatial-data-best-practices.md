@@ -187,11 +187,26 @@ Identify bottlenecks + high resource use
 
 ## Determine memory usage
 
+
 ```r
-r <- raster("~/data/LandCoverOfCanada2005_V1_4/LCC2005_V1_4a.tif")
+f <- "~/data/LandCoverOfCanada2005_V1_4/LCC2005_V1_4a.tif"
+r <- raster::raster(f)
 object.size(r)
-inMemory(r)
 ```
+
+```
+17112 bytes
+```
+
+```r
+raster::inMemory(r)
+```
+
+```
+[1] FALSE
+```
+
+Also, use OS tools for monitoring memory use.
 
 Code profiling (3)
 ========================================================
@@ -313,4 +328,4 @@ Questions?
 meow::meow()
 ```
 
-![plot of chunk unnamed-chunk-1](spatial-data-best-practices-figure/unnamed-chunk-1-1.png)
+![plot of chunk unnamed-chunk-2](spatial-data-best-practices-figure/unnamed-chunk-2-1.png)

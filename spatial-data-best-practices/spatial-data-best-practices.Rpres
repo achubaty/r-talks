@@ -187,11 +187,14 @@ Identify bottlenecks + high resource use
 
 ## Determine memory usage
 
-```r
-r <- raster("~/data/LandCoverOfCanada2005_V1_4/LCC2005_V1_4a.tif")
+```{r}
+f <- "~/data/LandCoverOfCanada2005_V1_4/LCC2005_V1_4a.tif"
+r <- raster::raster(f)
 object.size(r)
-inMemory(r)
+raster::inMemory(r)
 ```
+
+Also, use OS tools for monitoring memory use.
 
 Code profiling (3)
 ========================================================
