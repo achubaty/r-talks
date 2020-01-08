@@ -50,7 +50,8 @@ Best Practices
 
 - Bryan, J. 2017. Excuse me, do you have a moment to talk about version control? PeerJ Prepr. 5:1–23. https://peerj.com/preprints/3159v2/
 - Visser M. D. _et al._. 2015. Speeding up ecological and evolutionary computations in R; essentials of high performance computing for biologists. PLOS Comput. Biol. 11:e1004140.
-- Wilson, G. _et al._ 2014. Best practices for scientific computing. PLoS Biol. 12:e1001745.
+- Wilson, G. _et al._ 2014. Best practices for scientific computing. PLoS Biol. 12(1):e1001745.
+- Wilson, G. _et al._ 2017. Good enough practices in scientific computing. PLoS Comput. Biol. 13(6):e1005510.
 
 R projects
 =========================================================
